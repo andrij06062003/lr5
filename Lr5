@@ -1,0 +1,537 @@
+#include <iostream>
+#include <cstdlib>
+#define N 10
+#define R 5
+using namespace std;
+
+class Universiade
+{
+private:
+    string name = "xxx";
+    int day = 0;
+    int month = 0;
+    int year = 0;
+public:
+    bool pname = false, pday = false, pmonth = false, pyear = false;
+    void SetName(string name)
+    {
+        this->name = name;
+        pname = true;
+    }
+    void SetDay(int day)
+    {
+        this->day = day;
+        pday = true;
+    }
+    void SetMonth(int month)
+    {
+        this->month = month;
+        pmonth = true;
+    }
+    void SetYear(int year)
+    {
+        this->year = year;
+        pyear = true;
+    }
+    string GetName(void) const
+    {
+        return this->name;
+    }
+    int GetDay(void) const
+    {
+        return this->day;
+    }
+    int GetMonth(void) const
+    {
+        return this->month;
+    }
+    int GetYear(void) const
+    {
+        return this->year;
+    }
+    virtual string GetTeamName(void) const
+    {
+        return "";
+    }
+};
+
+class Better_more : public Universiade
+{
+private:
+    string team_name1;
+    int people_in_team1;
+    bool winner_team1 = false;
+    int kind_of_sport1;
+    int result_of_winning1;
+public:
+    int institute1;
+    int number_of_winning1;
+    bool pteamname1 = false, ppeopleinteam1 = false, pinstitute1 = false, presultofwinning1 = false, pkindofsport1 = false;
+    Better_more()
+    {
+        team_name1 = 'x';
+        people_in_team1 = 0;
+        institute1 = 0;
+        number_of_winning1 = 0;
+        result_of_winning1 = 0;
+        kind_of_sport1 = 0;
+    }
+    virtual void SetTeamName(string team_name)
+    {
+        this->team_name1 = team_name;
+        pteamname1 = true;
+    }
+    virtual void SetPeopleInTeam(int people_in_team)
+    {
+        this->people_in_team1 = people_in_team;
+        ppeopleinteam1 = true;
+    }
+    virtual void SetInstitute(int institute)
+    {
+        this->institute1 = institute;
+        pinstitute1 = true;
+    }
+    virtual void SetWinning(int result_of_winning)
+    {
+        this->result_of_winning1 = result_of_winning;
+        presultofwinning1 = true;
+    }
+    virtual void SetKindOfSport(int kind_of_sport)
+    {
+        this->kind_of_sport1 = kind_of_sport;
+        pkindofsport1 = true;
+    }
+    string GetTeamName(void) const override
+    {
+        return this->team_name1;
+    }
+    virtual int GetPeopleInTeam(void) const
+    {
+        return this->people_in_team1;
+    }
+    virtual int GetInstitute(void) const
+    {
+        return this->institute1;
+    }
+    virtual int GetNumberOfWinning(void) const
+    {
+        return this->number_of_winning1;
+    }
+    virtual int GetKindOfSport(void) const
+    {
+        return this->kind_of_sport1;
+    }
+    friend int GetWinnerTeam1(Better_more arr1[], int _kind_of_sport);
+};
+
+class Better_less : public Better_more
+{
+private:
+    string team_name2;
+    int people_in_team2;
+    int institute2;
+    int result_of_winning2;
+    int number_of_winning2;
+    bool winner_team2 = false;
+    int kind_of_sport2;
+public:
+    bool pteamname2 = false, ppeopleinteam2 = false, pinstitute2 = false, presultofwinning2 = false, pkindofsport2 = false;
+    Better_less()
+    {
+        team_name2 = 'x';
+        people_in_team2 = 0;
+        institute2 = 0;
+        result_of_winning2 = 0;
+        number_of_winning2 = 0;
+    }
+    void SetTeamName(string team_name) override
+    {
+        this->team_name2 = team_name;
+        pteamname2 = true;
+    }
+    void SetPeopleInTeam(int people_in_team) override
+    {
+        this->people_in_team2 = people_in_team;
+        ppeopleinteam2 = true;
+    }
+    void SetInstitute(int institute) override
+    {
+        this->institute2 = institute;
+        pinstitute2 = true;
+    }
+    void SetWinning(int result_of_winning) override
+    {
+        this->result_of_winning2 = result_of_winning;
+        presultofwinning2 = true;
+    }
+    void SetKindOfSport(int kind_of_sport) override
+    {
+        this->kind_of_sport2 = kind_of_sport;
+        pkindofsport2 = true;
+    }
+    string GetTeamName(void) const override
+    {
+        return this->team_name2;
+    }
+    int GetPeopleInTeam(void) const override
+    {
+        return this->people_in_team2;
+    }
+    int GetInstitute(void) const override
+    {
+        return this->institute2;
+    }
+    int GetNumberOfWinning(void) const override
+    {
+        return this->number_of_winning2;
+    }
+    int GetKindOfSport(void) const override
+    {
+        return this->kind_of_sport2;
+    }
+    friend int GetWinnerTeam2(Better_less arr2[], int _kind_of_sport);
+    friend void Sort_and_print(Better_more arr1[], Better_less arr2[], char _list_institute[][10]);
+};
+
+int GetWinnerTeam1(Better_more arr1[], int _kind_of_sport);
+int GetWinnerTeam2(Better_less arr2[], int _kind_of_sport);
+void Sort_and_print(Better_more arr1[], Better_less arr2[], char _list_institute[][10]);
+
+int main(void)
+{
+    system("chcp 1251");
+    system("cls");
+
+    char list_institute[R][10] = { "LPNU", "LNU", "KPI", "KNUKIM", "LDU BJD" };
+    
+    string list_of_sport[R] = { "Long jump", "Bullet shooting", "Pull-up", "Run", "Swimming" };
+
+    Universiade u1;
+    Better_more bm1[N];
+    Better_less bl1[N];
+
+    int a, b, b1;
+    string c;
+    do
+    {
+        cout << "\n 1. Вказати назву універсіади.\n 2. Вказати дату проведення.\n 3. Пройти далі.\n\n  Виберіть пункт: ";
+        cin >> a;
+        switch (a)
+        {
+        case 1: cout << "\n  Введіть назву: ";
+            cin >> c;
+            u1.SetName(c);
+            break;
+        case 2: cout << "\n  Введіть день: ";
+            cin >> b;
+            u1.SetDay(b);
+            cout << "\n  Введіть місяць: ";
+            cin >> b;
+            u1.SetMonth(b);
+            cout << "\n  Введіть рік: ";
+            cin >> b;
+            u1.SetYear(b);
+            break;
+        }
+    } while (a != 3);
+
+    int more_or_less;
+    bool A = false;
+
+    char d[20];
+    do
+    {
+        cout << "\n 1. Вказати дані про команду.\n 2. Надрукувати назву універсіади.\n 3. Надрукувати дату проведення універсіади.\n 4. Надрукувати назву команди.\n 5. Надрукувати дані про команду.\n 6. Надрукувати індекс команди-лідера.\n 7. Вивести відсортований список університетів.\n 8. Вийти\n\n  Виберіть пункт: ";
+        cin >> a;
+        switch (a)
+        {
+        case 1: cout << "\n  Введіть номер команди: ";
+            cin >> b1;
+            cout << "\n  Введіть назву: ";
+            cin >> d;
+            cout << "\n Список видів спорту:";
+            for (int i = 0; i < R; i++)
+            {
+                cout << "\n " << i + 1 << ". " << list_of_sport[i];
+            }
+            cout << "\n\n  Виберіть, в якому виді спорту команда бере участь: ";
+            cin >> more_or_less;
+            if (more_or_less - 1 < R - 1)
+            {
+                bm1[b1].SetTeamName(d);
+                bm1[b1].SetKindOfSport(more_or_less - 1);
+            }
+            else
+            {
+                bl1[b1].SetTeamName(d);
+                bl1[b1].SetKindOfSport(more_or_less - 1);
+            }
+            cout << "\n  Введіть кількість учасників команди: ";
+            cin >> b;
+            if (more_or_less - 1 < R - 1)
+                bm1[b1].SetPeopleInTeam(b);
+            else
+                bl1[b1].SetPeopleInTeam(b);
+            cout << "\n Список інститутів:";
+            for (int i = 0; i < R; i++)
+            {
+                cout << "\n " << i + 1 << ". " << list_institute[i];
+            }
+            cout << "\n\n  Виберіть інститут: ";
+            cin >> b;
+            if (more_or_less - 1 < R - 1)
+                bm1[b1].SetInstitute(b - 1);
+            else
+                bl1[b1].SetInstitute(b - 1);
+            cout << "\n  Введіть результат команди: ";
+            cin >> b;
+            if (more_or_less - 1 < R - 1)
+                bm1[b1].SetWinning(b);
+            else
+                bl1[b1].SetWinning(b);
+            break;
+        case 2:
+            if (u1.pname)
+            {
+                cout << "\n Назва універсіади: " << u1.GetName() << "\n\n";
+                break;
+            }
+            else
+            {
+                cout << "\n\n   Ви не ввели назву універсіади!\n\n";
+                break;
+            }
+        case 3:
+            if (u1.pday || u1.pmonth || u1.pyear)
+            {
+                cout << "\n Дата проведення універсіади: " << u1.GetDay() << "." << u1.GetMonth() << "." << u1.GetYear() << "р." << "\n\n";
+                break;
+            }
+            else
+            {
+                cout << "\n\n   Ви не ввели дату проведення універсіади!\n\n";
+                break;
+            }
+        case 4: cout << "\n Список видів спорту:";
+            for (int i = 0; i < R; i++)
+            {
+                cout << "\n " << i + 1 << ". " << list_of_sport[i];
+            }
+            cout << "\n\n  Виберіть, в якому виді спорту команда бере участь: ";
+            cin >> more_or_less;
+            cout << "\n  Введіть номер команди: ";
+            cin >> b1;
+            Universiade* univ[N * 2];
+            for (int i = 0; i < N; i++)
+            {
+                univ[i] = &bm1[i];
+            }
+            for (int i = N; i < N * 2; i++)
+            {
+                univ[i] = &bl1[i - N];
+            }
+            if (more_or_less - 1 < R - 1)
+            {
+                if (((Better_more*)univ[b1])->pteamname1)
+                {
+                    cout << "\n Назва команди: " << univ[b1]->GetTeamName() << "\n\n";
+                    break;
+                }
+                else
+                {
+                    cout << "\n\n   Ви не ввели назву команди!\n\n";
+                    break;
+                }
+            }
+            else
+            {
+                if (((Better_less*)univ[b1])->pteamname2)
+                {
+                    cout << "\n Назва команди: " << univ[b1]->GetTeamName() << "\n\n";
+                    break;
+                }
+                else
+                {
+                    cout << "\n\n   Ви не ввели назву команди!\n\n";
+                    break;
+                }
+            }
+        case 5: cout << "\n Список видів спорту:";
+            for (int i = 0; i < R; i++)
+            {
+                cout << "\n " << i + 1 << ". " << list_of_sport[i];
+            }
+            cout << "\n\n  Виберіть, в якому виді спорту команда бере участь: ";
+            cin >> more_or_less;
+            cout << "\n  Введіть номер команди: ";
+            cin >> b1;
+            if (more_or_less - 1 < R - 1)
+            {
+                if (bm1[b1].ppeopleinteam1 || bm1[b1].pinstitute1 || bm1[b1].presultofwinning1 || bm1[b1].pkindofsport1)
+                {
+                    cout << "\n Кількість людей у команді: " << bm1[b1].GetPeopleInTeam();
+                    b = bm1[b1].GetInstitute();
+                    cout << "\n Команда належить до такого інституту: " << list_institute[b];
+                    cout << "\n Команда має таку кількість виграшів: " << bm1[b1].GetNumberOfWinning();
+                    cout << "\n Команда бере участь в такому виді спорту: " << bm1[b1].GetKindOfSport() << "\n\n";
+                    break;
+                }
+                else
+                {
+                    cout << "\n\n   Ви не ввели дані про команду!\n\n";
+                    break;
+                }
+            }
+            else
+            {
+                if (bl1[b1].ppeopleinteam2 || bl1[b1].pinstitute2 || bl1[b1].presultofwinning2)
+                {
+                    cout << "\n Кількість людей у команді: " << bl1[b1].GetPeopleInTeam();
+                    b = bl1[b1].GetInstitute();
+                    cout << "\n Команда належить до такого інституту: " << list_institute[b];
+                    cout << "\n Команда має таку кількість виграшів: " << bl1[b1].GetNumberOfWinning();
+                    cout << "\n Команда бере участь в такому виді спорту: " << bl1[b1].GetKindOfSport() << "\n\n";
+                    break;
+                }
+                else
+                {
+                    cout << "\n\n   Ви не ввели дані про команду!\n\n";
+                    break;
+                }
+            }
+        case 6: cout << "\n Список видів спорту:";
+            for (int i = 0; i < R; i++)
+            {
+                    cout << "\n " << i + 1 << ". " << list_of_sport[i];
+            }
+            cout << "\n\n  Виберіть, в якому виді спорту команда бере участь: ";
+            cin >> more_or_less;
+            if (more_or_less - 1 < R - 1)
+            {
+                cout << "\n Індекс команди-лідера: " << GetWinnerTeam1(bm1, more_or_less - 1) << "\n\n";
+                break;
+            }
+            else
+            {
+                cout << "\n Індекс команди-лідера: " << GetWinnerTeam2(bl1, more_or_less - 1) << "\n\n";
+                break;
+            }
+        case 7: Sort_and_print(bm1, bl1, list_institute);
+            break;
+        }
+    } while (a != 8);
+
+    return 0;
+}
+
+int GetWinnerTeam1(Better_more arr1[], int _kind_of_sport)
+{
+    int _winner_team = 0;
+    bool A1 = false;
+    for (int i = 0; i < N; i++)
+    {
+        if (_kind_of_sport == arr1[i].kind_of_sport1)
+        {
+            if (arr1[i].result_of_winning1 != 0)
+            {
+                A1 = true;
+                if (arr1[i].result_of_winning1 > arr1[_winner_team].result_of_winning1)
+                {
+                    _winner_team = i;
+                }
+            }
+        }
+    }
+    if (A1)
+        return _winner_team;
+    else
+        return -1;
+}
+
+int GetWinnerTeam2(Better_less arr2[], int _kind_of_sport)
+{
+    int _winner_team = 0;
+    bool A2 = false;
+    for (int i = 0; i < N; i++)
+    {
+        if (_kind_of_sport == arr2[i].kind_of_sport2)
+        {
+            if (arr2[i].result_of_winning2 != 0)
+            {
+                A2 = true;
+                if (arr2[i].result_of_winning2 < arr2[_winner_team].result_of_winning2)
+                {
+                    _winner_team = i;
+                }
+            }
+        }
+    }
+    if (A2)
+        return _winner_team;
+    else
+        return -1;
+}
+
+void Sort_and_print(Better_more arr1[], Better_less arr2[], char _list_institute[][10])
+{
+    int winning_in_institute[R];
+    int numbers_for_institute[R];
+    for (int i = 0; i < R; i++)
+    {
+        numbers_for_institute[i] = i;
+        winning_in_institute[i] = 0;
+    }
+    int x1;
+    int x;
+    int k;
+
+    int prosto = 0;
+
+    do
+    {
+        for (int k = 0; k < R; k++)
+        {
+            if ((prosto = GetWinnerTeam1(arr1, k)) != -1)
+            {
+                winning_in_institute[prosto]++;
+            }
+        }
+        for (int k = 0; k < R; k++)
+        {
+            if ((prosto = GetWinnerTeam2(arr2, k)) != -1)
+            {
+                winning_in_institute[prosto]++;
+            }
+        }
+        for (int i = 0; i < N; i++)
+        {
+            for (int j = 0; j < R - 1; j++)
+            {
+                if (winning_in_institute[j] != 0 || winning_in_institute[j + 1] != 0)
+                {
+                    if (winning_in_institute[j] > winning_in_institute[j + 1])
+                    {
+                        x = numbers_for_institute[j];
+                        numbers_for_institute[j] = numbers_for_institute[j + 1];
+                        numbers_for_institute[j + 1] = x;
+                        k = winning_in_institute[j];
+                        winning_in_institute[j] = winning_in_institute[j + 1];
+                        winning_in_institute[j + 1] = k;
+                    }
+                }
+            }
+        }
+        x1 = 1;
+    } while (x1 < 1);
+
+    cout << "\n Відсортовані університети за спаданням кількості перемог:";
+    int y = 1;
+    for (int i = 0; i < R; i++)
+    {
+        if (winning_in_institute[i] != 0)
+        {
+            cout << "\n " << y++ << ". " << _list_institute[numbers_for_institute[i]];
+        }
+    }
+    cout << "\n\n";
+}
